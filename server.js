@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // Setting up the Express app to handle data parsing
-app.use(express.urlenconded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes for the api and the html
