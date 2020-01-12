@@ -5,17 +5,14 @@ const dbJSON = require("../db/db");
 // Routes ======================================================
 
 module.exports = function(app) {
+   // GET the api for the notes
    app.get("/api/notes", function(request, response) {
-      return response.json(path.join(__dirname, "../db/db.json"));
+      response.json(dbJSON);
    });
 
    app.post("/api/notes", function(request, response) {
-      let title = response.title;
-      let text = response.text;
-
-      let dataJSON = `{ "title": ${title}, "text": ${text} }`;
-
-      dbJSON.push(dataJSON);
+      console.log(response.req.body);
+      dbJSON.push(response.req.body);
    });
 };
 
@@ -28,3 +25,9 @@ module.exports = function(app) {
 //   * POST `/api/notes` - Should recieve a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
 
 //   * DELETE `/api/notes/:id` - Should recieve a query paramter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
+
+// SeverResponse.req.body
+
+// response.socket.ServerResponse[0].req
+
+// req
