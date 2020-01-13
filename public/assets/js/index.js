@@ -3,36 +3,42 @@ const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
 const $newNoteBtn = $(".new-note");
 const $noteList = $(".list-container .list-group");
+// const dbJSONObj = require("../../../db/db");
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// function getIDIndex() {
+//    let dbLength = dbJSONObj.length;
+//    console.log(dbLength);
+// }
+
 let noteID = 1;
 
 // A function for getting all notes from the db
-const getNotes = function() {
+function getNotes() {
    return $.ajax({
       url: "/api/notes",
       method: "GET"
    });
-};
+}
 
 // A function for saving a note to the db
-const saveNote = function(note) {
+function saveNote(note) {
    return $.ajax({
       url: "/api/notes",
       data: note,
       method: "POST"
    });
-};
+}
 
 // A function for deleting a note from the db
-const deleteNote = function(id) {
+function deleteNote(id) {
    return $.ajax({
       url: "api/notes/" + id,
       method: "DELETE"
    });
-};
+}
 
 // If there is an activeNote, display it, otherwise render empty inputs
 const renderActiveNote = function() {
@@ -75,7 +81,7 @@ const handleNoteDelete = function(event) {
    // prevents the click listener for the list from being called when the button inside of it is clicked
    event.stopPropagation();
 
-   console.log("click heard!");
+   console.log("delete click heard!");
 
    var note = $(this)
       .parent(".list-group-item")
@@ -88,6 +94,7 @@ const handleNoteDelete = function(event) {
    }
 
    deleteNote(note.id).then(function() {
+      console.log("deleted from this jownt");
       getAndRenderNotes();
       renderActiveNote();
    });
@@ -142,6 +149,7 @@ const renderNoteList = function(notes) {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = function() {
    return getNotes().then(function(data) {
+      console.log("rendered data successfully");
       renderNoteList(data);
    });
 };
@@ -155,3 +163,4 @@ $noteText.on("keyup", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+// getIDIndex();
