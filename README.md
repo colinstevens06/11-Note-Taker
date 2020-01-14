@@ -20,4 +20,4 @@ We were given starter code - HTML, CSS and an index.js file - and we were to wri
 
 ## Screenshot
 
-!(screenshot of the application)[note-taker-screenshot.png]
+![screenshot of the application](note-taker-screenshot.png)
