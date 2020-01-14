@@ -15,8 +15,7 @@ module.exports = function(app) {
       console.log("Post successful! Data logged:");
       console.log(response.req.body);
       dbJSON.push(response.req.body);
-      response.end();
-      return response.req.body.id;
+      response.end("yes");
    });
 
    // delete items when the trashcan icon is pressed
